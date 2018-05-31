@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-controller="myCtrl">
+<head>
+	<title>Store</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<!--Styles-->
+	<link href="css/bootstrap.css" rel="stylesheet" />
+	<style>
+		img		{ max-width: 100%; }
+		/*For Testing*/
+		/*.row div {
+			border-style: solid;
+			text-align: center;
+		}*/
+	</style>
+
+	<!--Scripts-->
+	<script src="js/jquery-1.12.4.js"></script>
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/angular.min.js"></script>
+	<script src="myApp.js"></script>
+</head>
+<body>
+	<div class="container">
+		<!--Navbar Source: https://stackoverflow.com/questions/49046051/bootstrap-4-navbar-not-showing-navbar-items-->
+		<nav class="navbar navbar-expand-md navbar-light bg-faded">
+			<a class="navbar-brand" onclick="goBack()">
+				<img src="images/LOGO.JPG" width="30" height="30" class="d-inline-block align-top" alt="">
+			</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Link</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Link</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+<!------------------------------------------->
+		<!--SEARCH-->
+		<div class="row">
+			<div class="col-md-4 col-sm-12">
+				<select  class="form-control">
+					<option value="category-1">Category 1</option>
+					<option value="Category-2">Category 2</option>
+					<option value="Category-3">Category 3</option>
+				</select>
+			</div>
+			<div class="col-md-8 col-sm-12">
+				<input type="text" data-ng-model="search" placeholder="search..."  class="form-control"/>
+			</div>
+		</div>
+<!------------------------------------------->
+		<!--HOME-->
+		<div ng-if="search == '' || search == null">
+			<!--LANDING PAGE & LOGIN-->
+			<div class="row">
+				<div class="col-md-8 col-sm-12 jumbotron">
+					<h2>Popular</h2>
+					<div class="row">
+						<div class="col-md-4 col-sm-12">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+						<div class="col-md-4 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+					<h2>Login</h2>
+					<label for="username">Username</label>
+					<input type="text" name="username" class="form-control"/>
+					<br/>
+					<label for="password">Password</label>
+					<input type="password" name="password" class="form-control"/>
+					<br/>
+					<input type="submit" value="Login" class="form-control"/>
+				</div>
+			</div>
+			<!--PRODUCTS-->
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-3 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+						<div class="col-md-3 col-sm-6">
+							<img src="images/generic.jpg"/>
+							<a href=""><p>PRODUCT NAME</p></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!------------------------------------------->
+		<!--Search Page-->
+	<!--It accepts 2 text input filters, namely: unit code and unit description.-->
+	<label for="codeIn">unit code: </label><input ng-model="searchCode" type="text" name="codeIn">
+	<br/>
+	<label for="descIn">unit description: </label>
+	<input ng-model="searchDesc" type="text" name="descIn">
+
+	<!--It has a radio input filter to select unit type, namely: core, software development, systems analysis and all.-->
+	<p>
+		Core <input type="radio" name="unitType" value="Core" ng-model="searchType">
+		Software Development <input type="radio" name="unitType" value="Software Development" ng-model="searchType">
+		Systems Analysis <input type="radio" name="unitType" value="Systems Analysis" ng-model="searchType">
+		All <input type="radio" name="unitType" value="" checked="checked" ng-model="searchType">
+	</p>
+	<!--Display the unit information in a table-->
+		<div class="table-responsive" ng-if="dataLoaded">
+			<table class="table table-striped table-hover">
+				<caption>List of Units</caption>
+				<tr>
+					<th id="codes" scope="col">Code</th>
+					<th id="descs" scope="col">Description</th>
+					<th id="cps" scope="col">CP</th>
+					<th id="types" scope="col">Type</th>
+				</tr>
+				<tr data-ng-repeat="unit in filteredUnits | offset: currentPage*unitsPerPage | limitTo: unitsPerPage | orderBy : 'desc'">
+					<td headers="codes">{{ unit.code }}</td>
+					<td headers="descs">{{ unit.desc }}</td>
+					<td headers="cps">{{ unit.cp | number: 2 }}</td>
+					<td headers="types">{{ unit.type }}</td>
+				</tr>
+				<!--Pagenation Footer-->
+				<tfoot>
+					<tr>
+						<td colspan="4">
+							<ul class="pagination">
+								<li data-ng-if="!prevPageDisabled()" data-ng-click="prevPage()">
+									<a href="#">Prev</a>
+								</li>
+								<li data-ng-repeat="n in range()" data-ng-class="{active: n == currentPage}" data-ng-click="setPage(n)">
+									<a href="#">{{n+1}}</a>
+								</li>
+								<li data-ng-if="!nextPageDisabled()" data-ng-click="nextPage()">
+									<a href="#">Next</a>
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+
+
+<!------------------------------------------->
+		<!--Footer-->
+		<div class="row">
+			<div class="col-md-9 col-sm-12"><!--FOOTER TEXT-->
+				<p>Copyright 2018: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. </p>
+				<p>Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+
+			</div>
+			<div class="col-md-3 col-sm-12">
+				<img src="images/facebook.png">
+				<img src="images/Twitter.png">
+				<img src="images/linkedin.png">
+			</div>
+		</div>
+	</div>
+</body>
+</html>
